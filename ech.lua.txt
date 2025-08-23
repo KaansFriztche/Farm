@@ -35,7 +35,7 @@ WindUI:AddTheme({
 WindUI:SetTheme("Valentine")
 
 WindUI:AddTheme({
-    Name = "Lear Hub",
+    Name = "Sydearr Hub",
     
     Accent = "#1b1b1b",
     Outline = "#FFFFFF",
@@ -51,7 +51,7 @@ WindUI:SetTheme("Lear Hub")
 
 
 local Window = WindUI:CreateWindow({
-    Title = "Echelon Hub",
+    Title = "Sydearr Hub",
     Icon = "rbxassetid://136271753706984",
     Author = "1.0",
     Size = UDim2.fromOffset(550, 350),
@@ -109,32 +109,32 @@ MainTab:Paragraph({
 
 MainTab:Button({
     Title = "Discord Link",
-    Desc = "5xZXaSr3Nq",
+    Desc = "V3Wnvr9rkt",
     Callback = function() 
 WindUI:Notify({
             Title = "Copied link:",
-            Content = "https://discord.gg/5xZXaSr3Nq",
+            Content = "https://discord.gg/V3Wnvr9rkt",
             Icon = "link",
             Duration = 4,
         })
-setclipboard("https://discord.gg/5xZXaSr3Nq") end
+setclipboard("https://discord.gg/V3Wnvr9rkt") end
 })
 
 MainTab:Button({
     Title = "YouTube Link:",
-    Desc = "Echelon",
+    Desc = "Sydearr",
     Callback = function() 
 WindUI:Notify({
             Title = "Copied link",
-            Content = "https://m.youtube.com/channel/UCMPNe8f-2EvJefwZgch3G9A",
+            Content = "https://www.youtube.com/@Sydearr",
             Icon = "link",
             Duration = 4,
         })
-setclipboard("https://m.youtube.com/channel/UCMPNe8f-2EvJefwZgch3G9A") end
+setclipboard("https://www.youtube.com/@Sydearr") end
 })
 
 MainTab:Paragraph({
-    Title = "Made By Echelon",
+    Title = "Made By Sydearr",
     Desc = "Hi this script is just developing, please let me know if there is a bug, thanks",
     Image = "rbxassetid://133755542334730", -- lucide or URL or rbxassetid://
     ImageSize = 100
@@ -2144,6 +2144,7 @@ DbgTab:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gameremotefireserver.lua"))()
 	end
 })
+
 
 
 
