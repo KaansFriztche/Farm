@@ -1,0 +1,2149 @@
+
+
+
+
+--Library
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+
+
+
+--Themes
+
+WindUI:AddTheme({
+    Name = "Halloween",
+    
+    Accent = "#331400",
+    Outline = "#400000",
+    
+    Text = "#EAEAEA",
+    PlaceholderText = "#AAAAAA"
+})
+
+WindUI:SetTheme("Halloween")
+
+WindUI:AddTheme({
+    Name = "Valentine",
+    
+    Accent = "#660000",
+    Outline = "#660000",
+    
+    Text = "#000000",
+    PlaceholderText = "#000000"
+})
+
+WindUI:SetTheme("Valentine")
+
+WindUI:AddTheme({
+    Name = "Lear Hub",
+    
+    Accent = "#1b1b1b",
+    Outline = "#FFFFFF",
+    
+    Text = "#ff0000",
+    PlaceholderText = "#ff0000"
+})
+
+WindUI:SetTheme("Lear Hub")
+
+
+
+
+
+local Window = WindUI:CreateWindow({
+    Title = "Echelon Hub",
+    Icon = "rbxassetid://136271753706984",
+    Author = "1.0",
+    Size = UDim2.fromOffset(550, 350),
+    Transparent = true,
+    Theme = "Dark",
+    SideBarWidth = 150,
+    HasOutline = false,
+})
+
+--tabs
+local MainTab = Window:Tab({ Title = "Main", Icon = "house" })
+local PlayerTab = Window:Tab({ Title = "Player", Icon = "dna" })
+local VisualsTab = Window:Tab({ Title = "Visuals", Icon = "eye" })
+Window:Divider()
+local TrollsTab = Window:Tab({ Title = "Trolls", Icon = "rbxassetid://104928133693808" })
+Window:Divider()
+local AdminsTab = Window:Tab({ Title = "Admins", Icon = "rbxassetid://6935096958" })
+local HubTab = Window:Tab({ Title = "Hub", Icon = "notepad-text"})
+local ScriptTab = Window:Tab({ Title = "Scripts", Icon = "rbxassetid://6026568213" })
+local FeTab = Window:Tab({ Title = "Fe Scirpts", Icon = "file-archive" })
+Window:Divider()
+local MusicTab = Window:Tab({ Title = "Music", Icon = "music" })
+local ToolsTab = Window:Tab({ Title = "Tools", Icon = "hammer" })
+local DbgTab = Window:Tab({ Title = "Debuggers", Icon = "backpack" })
+Window:Divider()
+local SettingsTab = Window:Tab({ Title = "Settings", Icon = "settings" })
+local LogTab = Window:Tab({ Title = "Logs", Icon = "logs" })
+
+--main tab
+PlayerTab:Section({ Title = "Local" })
+
+
+local GameId = game.PlaceId
+local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local plrs = game:GetService("Players")
+local plr = plrs.LocalPlayer
+local plrname = plr.Name
+local plrid = plr.UserId
+local plrchr = plr.Character
+local plrage = plr.AccountAge
+local plrcount = #plrs:GetPlayers()
+
+MainTab:Paragraph({
+    Title = "Player Information",
+    Desc = "Player Name:" .. plrname ..
+           "\nPlayerID: " .. plrid ..
+           "\nChracter: " .. tostring(plrchr) ..
+           "\nAccount Age: " .. plrage .. " day" ..
+           "\nPlayers Count: " .. plrcount ..
+           "\nGame Name: " .. GameName ..
+           "\nGame ID: " .. GameId,
+    Image = "computer", -- lucide or URL or rbxassetid://
+    ImageSize = 50
+})
+
+MainTab:Button({
+    Title = "Discord Link",
+    Desc = "5xZXaSr3Nq",
+    Callback = function() 
+WindUI:Notify({
+            Title = "Copied link:",
+            Content = "https://discord.gg/5xZXaSr3Nq",
+            Icon = "link",
+            Duration = 4,
+        })
+setclipboard("https://discord.gg/5xZXaSr3Nq") end
+})
+
+MainTab:Button({
+    Title = "YouTube Link:",
+    Desc = "Echelon",
+    Callback = function() 
+WindUI:Notify({
+            Title = "Copied link",
+            Content = "https://m.youtube.com/channel/UCMPNe8f-2EvJefwZgch3G9A",
+            Icon = "link",
+            Duration = 4,
+        })
+setclipboard("https://m.youtube.com/channel/UCMPNe8f-2EvJefwZgch3G9A") end
+})
+
+MainTab:Paragraph({
+    Title = "Made By Echelon",
+    Desc = "Hi this script is just developing, please let me know if there is a bug, thanks",
+    Image = "rbxassetid://133755542334730", -- lucide or URL or rbxassetid://
+    ImageSize = 100
+})
+
+
+
+
+PlayerTab:Slider({
+    Title = "Speed",
+    Value = {
+        Min = 0,
+        Max = 200,
+        Default = 16,
+    },
+    Callback = function(s) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s end
+})
+
+PlayerTab:Slider({
+    Title = "Jump Power",
+    Value = {
+        Min = 0,
+        Max = 200,
+        Default = 0,
+    },
+    Callback = function(s) game.Players.LocalPlayer.Character.Humanoid.JumpPower = s end
+})
+
+
+PlayerTab:Slider({
+    Title = "Gravity",
+    Value = {
+        Min = 0,
+        Max = 200,
+        Default = 2,
+    },
+    Callback = function(s) game.Workspace.Gravity = s end
+})
+
+PlayerTab:Slider({
+    Title = "Hip Height",
+    Value = {
+        Min = 0,
+        Max = 200,
+        Default = 2,
+    },
+    Callback = function(s) game.Players.LocalPlayer.Character.Humanoid.HipHeight = s end
+})
+
+PlayerTab:Section({ Title = "Fov" })
+
+PlayerTab:Slider({
+    Title = "Fov",
+    Value = {
+        Min = 0,
+        Max = 200,
+        Default = 18,
+    },
+    Callback = function(s) game.Workspace.CurrentCamera.FieldOfView = s end
+})
+
+PlayerTab:Slider({
+    Title = "Time",
+    Value = {
+        Min = 0,
+        Max = 8,
+        Default = 0,
+    },
+    Callback = function(p) game:GetService("Lighting").ClockTime = p end
+})
+
+
+
+
+PlayerTab:Section({ Title = "Fly" })
+
+
+PlayerTab:Button({
+    Title = "Pc fly",
+    Desc = "Key Q",
+    Callback = function()  
+loadstring(game:HttpGet("https://pastebin.com/raw/jpRKGvvi",true))()
+end
+})
+
+
+PlayerTab:Button({
+    Title = "Pc Invisible",
+    Desc = "Key e",
+    Callback = function()  
+loadstring(game:HttpGet("https://pastebin.com/raw/hk09qgd9"))()
+end
+})
+
+PlayerTab:Button({
+    Title = "Mobile Fly Gui",
+    Desc = "Gui",
+    Callback = function()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+end
+})
+
+
+
+
+
+
+
+PlayerTab:Section({ Title = "Character" })
+
+local aC;
+local aD;
+local aE;
+local aF;
+local aG;
+local aH;
+local aI = Client;
+local aJ = {
+    W = false,
+    S = false,
+    A = false,
+    D = false,
+    Moving = false
+}
+local aK = function()
+    if not game:GetService("Players").LocalPlayer.Character or not game:GetService("Players").LocalPlayer.Character.Head or
+        aH then
+        return
+    end
+    aC = game:GetService("Players").LocalPlayer.Character;
+    aD = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    aD.PlatformStand = true;
+    aG = workspace:WaitForChild('Camera')
+    aE = Instance.new("BodyVelocity")
+    aF = Instance.new("BodyAngularVelocity")
+    aE.Velocity, aE.MaxForce, aE.P = Vector3.new(0, 0, 0), Vector3.new(10000, 10000, 10000), 1000;
+    aF.AngularVelocity, aF.MaxTorque, aF.P = Vector3.new(0, 0, 0), Vector3.new(10000, 10000, 10000), 1000;
+    aE.Parent = aC.Head;
+    aF.Parent = aC.Head;
+    aH = true;
+    aD.Died:connect(function()
+        aH = false
+    end)
+end;
+local aL = function()
+    if not game:GetService("Players").LocalPlayer.Character or not aH then
+        return
+    end
+    game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").PlatformStand = false;
+    aE:Destroy()
+    aF:Destroy()
+    aH = false
+end;
+game:GetService("UserInputService").InputBegan:connect(function(aM, aN)
+    if aM.UserInputType == Enum.UserInputType.MouseButton1 and
+        game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) and Settings.ClickTeleport then
+        game:GetService("Players").LocalPlayer.Character:MoveTo(game.Players.LocalPlayer:GetMouse().Hit.p)
+    end
+    if aN then
+        return
+    end
+    for q, aO in pairs(aJ) do
+        if q ~= "Moving" and aM.KeyCode == Enum.KeyCode[q] then
+            aJ[q] = true;
+            aJ.Moving = true
+        end
+    end
+end)
+game:GetService("UserInputService").InputEnded:connect(function(aM, aN)
+    if aN then
+        return
+    end
+    local L = false;
+    for q, aO in pairs(aJ) do
+        if q ~= "Moving" then
+            if aM.KeyCode == Enum.KeyCode[q] then
+                aJ[q] = false
+            end
+            if aJ[q] then
+                L = true
+            end
+        end
+    end
+    aJ.Moving = L
+end)
+local aP = function(aQ)
+    return aQ * (Settings.FlySpeed or 50) / aQ.Magnitude
+end;
+game:GetService("RunService").Heartbeat:connect(function(aR)
+    if aH and aC and aC.PrimaryPart then
+        local aI = aC.PrimaryPart.Position;
+        local aS = aG.CFrame;
+        local aT, aU, aV = aS:toEulerAnglesXYZ()
+        aC:SetPrimaryPartCFrame(CFrame.new(aI.x, aI.y, aI.z) * CFrame.Angles(aT, aU, aV))
+        if aJ.Moving then
+            local au = Vector3.new()
+            if aJ.W then
+                au = au + aP(aS.lookVector)
+            end
+            if aJ.S then
+                au = au - aP(aS.lookVector)
+            end
+            if aJ.A then
+                au = au - aP(aS.rightVector)
+            end
+            if aJ.D then
+                au = au + aP(aS.rightVector)
+            end
+            aC:TranslateBy(au * aR)
+        end
+    end
+end)
+
+PlayerTab:Toggle({
+    Title = "Noclip",
+    Default = false,
+    Callback = function(au) 
+Settings.Noclip = au;
+        if Settings.Noclip then
+            local L = Instance.new("Part", game:GetService("Lighting"))
+            L.Name = "niggANOclip"
+            local function aZ()
+                if game:GetService("Players").LocalPlayer.Character and Settings.Noclip then
+                    for v, a_ in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+                        if a_:IsA('BasePart') and a_.CanCollide and Settings.Noclip then
+                            a_.CanCollide = false
+                        end
+                    end
+                end
+            end
+            if aY then
+                aY:Disconnect()
+            end
+            aY = game:GetService("RunService").RenderStepped:Connect(aZ)
+        elseif game:GetService("Lighting"):FindFirstChild("niggANOclip") then
+            game:GetService("Lighting"):FindFirstChild("niggANOclip"):Destroy()
+            if aY then
+                aY:Disconnect()
+                aY = nil
+            end
+            if game:GetService("Players").LocalPlayer.Character then
+                for v, a_ in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+                    if a_:IsA('BasePart') then
+                        a_.CanCollide = true
+                    end
+                end
+            end
+        end
+ end
+})
+
+
+
+
+
+
+
+
+local JQ = false;
+PlayerTab:Toggle({
+    Title = "Bunny Hop",
+    Default = false,
+    Callback = function(K)  
+JQ = K;
+spawn(function()
+while wait()
+and JQ do game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Jump = true
+end
+end)
+end
+})
+
+PlayerTab:Button({
+    Title = "Reset Character",
+    Desc = "Reset",
+    Callback = function() game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end
+})
+
+PlayerTab:Button({
+    Title = "Reset Backpack",
+    Desc = "Reset",
+    Callback = function() local gear = game.Players.LocalPlayer.Backpack:GetChildren()
+    for i, child in ipairs(gear) do
+      child:Destroy()
+      end
+end
+})
+
+PlayerTab:Button({
+    Title = "God",
+    Callback = function()
+    loadstring(game:HttpGet("https://freenote.biz/raw/Fhpx5r5A8M"))()
+end
+})
+
+
+
+
+
+
+--visuals
+VisualsTab:Section({ Title = "Player" })
+
+VisualsTab:Input({
+    Title = "Player",
+    PlaceholderText = "name",
+    Callback = function(at)
+        Settings.Player = getPlayersByName(at)
+    end
+})
+
+VisualsTab:Button({
+    Title = "Goto",
+    Callback = function(au)
+        if not Settings.Player then
+                    return
+                end
+        WindUI:Notify({
+            Title = "Teleported",
+            Content = "Completed",
+            Icon = "euro",
+            Duration = 2,
+        })
+    
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = Settings.Player.Character
+                                                                                               .HumanoidRootPart.CFrame;
+                return
+            end
+            
+})
+ 
+ VisualsTab:Toggle({
+    Title = "View",
+    Default = false,
+    Callback = function(au) 
+    		if not Settings.Player and au == true or Settings.Player and not Settings.Player.Character and au ==
+                    true then
+                    x("Failed!", "Player was not found! Please enter player-name in textbox above.")
+                end
+                if au == true and Settings.Player then
+                    if workspace:FindFirstChild("ViewNIG") then
+                        workspace.ViewNIG:Destroy()
+                    end
+                    local L = Instance.new("Part", workspace)
+                    L.Name = "ViewNIG"
+                    game:GetService("Workspace").CurrentCamera.CameraSubject = Settings.Player.Character;
+                    WindUI:Notify({
+            Title = "Player",
+            Content = "view",
+            Icon = "eye",
+            Duration = 2,
+        })
+		return
+                elseif workspace:FindFirstChild("ViewNIG") then
+                    workspace.ViewNIG:Destroy()
+                    game:GetService("Workspace").CurrentCamera.CameraSubject =
+                        game:GetService("Players").LocalPlayer.Character;
+			WindUI:Notify({
+            Title = "Player",
+            Content = "unview",
+            Icon = "eye-closed",
+            Duration = 2,
+        })
+		return
+                end
+            end
+                    
+})
+
+VisualsTab:Section({ Title = "Appearance" })
+
+VisualsTab:Button({
+    Title = "Full Bright",
+    Callback = function()
+        loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-FullBright-Script-14383"))()
+        end
+})
+
+
+ VisualsTab:Toggle({
+    Title = "X ray",
+    Default = false,
+    Callback = function(enabled) xrayOn = enabled
+
+    if xrayOn then
+        for _, descendant in pairs(workspace:GetDescendants()) do
+            if descendant:IsA("BasePart") then
+                if not descendant:FindFirstChild("OriginalTransparency") then
+                    local originalTransparency = Instance.new("NumberValue")
+                    originalTransparency.Name = "OriginalTransparency"
+                    originalTransparency.Value = descendant.Transparency
+                    originalTransparency.Parent = descendant
+                end
+                descendant.Transparency = 0.5
+            end
+        end
+    else
+        for _, descendant in pairs(workspace:GetDescendants()) do
+            if descendant:IsA("BasePart") then
+                if descendant:FindFirstChild("OriginalTransparency") then
+                    descendant.Transparency = descendant.OriginalTransparency.Value
+                    descendant.OriginalTransparency:Destroy()
+                end
+            end
+        end
+    end
+end
+})
+
+
+ 
+
+ --SUS
+
+--Settings
+
+SettingsTab:Section({ Title = "Servers" })
+
+
+SettingsTab:Button({
+    Title = "Server Hop",
+    Callback = function()
+        local module = loadstring(game:HttpGet"https://raw.githubusercontent.com/LeoKholYt/roblox/main/lk_serverhop.lua")()
+		module:Teleport(game.PlaceId)
+    end
+})
+
+SettingsTab:Button({
+    Title = "Auto Rejoin",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/9fYwjt6n"))()
+    end
+})
+
+SettingsTab:Button({
+    Title = "Rejoin",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/1gtVMUz3"))()
+    end
+})
+
+SettingsTab:Button({
+    Title = "Small Server",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/QQMDVUHL"))() 
+    end
+})
+
+
+
+
+
+
+
+
+
+SettingsTab:Section({ Title = "Keybind" })
+
+local Keybind = SettingsTab:Keybind({
+    Title = "Keybind",
+    Desc = "Keybind Desc",
+    Value = "",
+    CanChange = true,
+    Callback = function(k)
+        if not KeybindClicked then
+            Window:Close()
+        else
+            Window:Open()
+        end
+        KeybindClicked = not KeybindClicked
+    end
+})
+
+
+local HttpService = game:GetService("HttpService")
+
+local folderPath = "WindUI"
+makefolder(folderPath)
+
+local function SaveFile(fileName, data)
+    local filePath = folderPath .. "/" .. fileName .. ".json"
+    local jsonData = HttpService:JSONEncode(data)
+    writefile(filePath, jsonData)
+end
+
+local function LoadFile(fileName)
+    local filePath = folderPath .. "/" .. fileName .. ".json"
+    if isfile(filePath) then
+        local jsonData = readfile(filePath)
+        return HttpService:JSONDecode(jsonData)
+    end
+end
+
+local function ListFiles()
+    local files = {}
+    for _, file in ipairs(listfiles(folderPath)) do
+        local fileName = file:match("([^/]+)%.json$")
+        if fileName then
+            table.insert(files, fileName)
+        end
+    end
+    return files
+end
+
+SettingsTab:Section({ Title = "Window" })
+
+local themeValues = {}
+for name, _ in pairs(WindUI:GetThemes()) do
+    table.insert(themeValues, name)
+end
+
+local themeDropdown = SettingsTab:Dropdown({
+    Title = "Select Theme",
+    Multi = false,
+    AllowNone = false,
+    Value = nil,
+    Values = themeValues,
+    Callback = function(theme)
+        WindUI:SetTheme(theme)
+    end
+})
+themeDropdown:Select(WindUI:GetCurrentTheme())
+
+local ToggleTransparency = SettingsTab:Toggle({
+    Title = "Toggle Window Transparency",
+    Callback = function(e)
+        Window:ToggleTransparency(e)
+    end,
+    Value = WindUI:GetTransparency()
+})
+
+SettingsTab:Section({ Title = "Save" })
+
+local fileNameInput = ""
+SettingsTab:Input({
+    Title = "Write File Name",
+    PlaceholderText = "Enter file name",
+    Callback = function(text)
+        fileNameInput = text
+    end
+})
+
+SettingsTab:Button({
+    Title = "Save File",
+    Callback = function()
+        if fileNameInput ~= "" then
+            SaveFile(fileNameInput, { Transparent = WindUI:GetTransparency(), Theme = WindUI:GetCurrentTheme() })
+        end
+    end
+})
+
+SettingsTab:Section({ Title = "Load" })
+
+local filesDropdown
+local files = ListFiles()
+
+filesDropdown = SettingsTab:Dropdown({
+    Title = "Select File",
+    Multi = false,
+    AllowNone = true,
+    Values = files,
+    Callback = function(selectedFile)
+        fileNameInput = selectedFile
+    end
+})
+
+SettingsTab:Button({
+    Title = "Load File",
+    Callback = function()
+        if fileNameInput ~= "" then
+            local data = LoadFile(fileNameInput)
+            if data then
+                WindUI:Notify({
+                    Title = "File Loaded",
+                    Content = "Loaded data: " .. HttpService:JSONEncode(data),
+                    Duration = 5,
+                })
+                if data.Transparent then 
+                    Window:ToggleTransparency(data.Transparent)
+                    ToggleTransparency:SetValue(data.Transparent)
+                end
+                if data.Theme then WindUI:SetTheme(data.Theme) end
+            end
+        end
+    end
+})
+
+SettingsTab:Button({
+    Title = "Overwrite File",
+    Callback = function()
+        if fileNameInput ~= "" then
+            SaveFile(fileNameInput, { Transparent = WindUI:GetTransparency(), Theme = WindUI:GetCurrentTheme() })
+        end
+    end
+})
+
+SettingsTab:Button({
+    Title = "Refresh List",
+    Callback = function()
+        filesDropdown:Refresh(ListFiles())
+    end
+})
+
+--logs
+
+
+LogTab:Paragraph({
+    Title = "V1.0 Update",
+    Desc = "Comeback | Mini Update",
+    Image = "house", -- lucide or URL or rbxassetid://
+    ImageSize = 60
+})
+
+
+--Fe
+
+
+
+
+local Section = FeTab:Section({
+	Title = "FE Event Hats"
+})
+
+
+FeTab:Button({
+	Title = "DinoBlox [R6 Only]",
+	Callback = function()
+	        WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/5Kt42cfe",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/5Kt42cfe'))
+	loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/fedinoblox/main/nonoti'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Ice Cream [R6 Only]",
+	Callback = function()
+	        WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://www.roblox.com/catalog/9560392730/Ice-Cold-Shaved-Ice",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+  	WindUI:Notify({
+	Title = "Controls!",
+	Desc = "E to lick ice cream and Q to stop licking",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://www.roblox.com/catalog/9560392730/Ice-Cold-Shaved-Ice'))
+    --hats
+--https://www.roblox.com/catalog/9560392730/Ice-Cold-Shaved-Ice
+
+--controls :
+--E : To lick ice cream 
+--Q : To stop licking 
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PYXDYT/FE-ICE-CREAM/main/V1"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Jet V1 [R6 Only]",
+	Callback = function()
+	        WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/QqbZtXMj",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/QqbZtXMj'))
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/jetv1/main/script'))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Blue Flame Hoverboard [R6 Only]",
+	Callback = function()
+	        WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/TCKUyjx7",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/TCKUyjx7'))
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/bluehoverboard/main/fescript'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Sofa Pc [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/XjdFXGdw",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/XjdFXGdw'))
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/pcsofa/main/scriptverycool'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Eiffel Tower [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/skJetUDu",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/skJetUDu'))
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/PYXDYT/FE-TOWER/main/V1"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "BMX Ride V2 [R6 Only]",
+	Callback = function()
+      		WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/aX8J7W82",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/aX8J7W82'))
+loadstring(game:HttpGet(('https://pastefy.ga/6SiK0qV3/raw'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Cursed Bat Cube [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/npFNxgQC",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/npFNxgQC'))	    
+    loadstring(game:HttpGet(('https://pastefy.ga/UfJvPD1G/raw'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Hoverboard V2 [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/tCf161BV",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/tCf161BV'))
+    WindUI:Notify({
+	Title = "Controls!",
+	Desc = "Modes: Q & E",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+loadstring(game:HttpGet(('https://pastebin.com/raw/YLv2KSZj'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Big Boy [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://www.roblox.com/catalog/9661543986/Nike-Shoebox-Costume",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://www.roblox.com/catalog/9661543986/Nike-Shoebox-Costume'))
+    loadstring(game:HttpGet('https://paste.ee/r/gQOXW', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Ghast [R6 Only]",
+	Callback = function()
+      		WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/VJU8brdw",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/VJU8brdw'))
+loadstring(game:HttpGet('https://pastefy.ga/zFn0z6VV/raw'))()
+      		
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Blue Flame Power [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/KF1PBAQg",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://pastebin.com/raw/KF1PBAQg'))	    
+      		loadstring("\103\97\109\101\58\71\101\116\83\101\114\118\105\99\101\40\34\83\116\97\114\116\101\114\71\117\105\34\41\58\83\101\116\67\111\114\101\40\34\83\101\110\100\78\111\116\105\102\105\99\97\116\105\111\110\34\44\32\123\32\10\9\84\105\116\108\101\32\61\32\34\77\97\100\101\32\66\121\32\73\109\32\80\97\116\114\105\99\107\34\59\10\9\84\101\120\116\32\61\32\34\34\59\10\9\73\99\111\110\32\61\32\34\34\125\41\10\68\117\114\97\116\105\111\110\32\61\32\49\54\59\10\10\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\40\39\104\116\116\112\115\58\47\47\112\97\115\116\101\102\121\46\103\97\47\111\57\90\104\120\107\81\48\47\114\97\119\39\41\44\116\114\117\101\41\41\40\41\10")()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Hog Rider [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/j2vnk0vJ",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/j2vnk0vJ'))	    
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/pigr/main/hogrider'))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Flying Umbrella [R6 Only]",
+	Callback = function()
+      	WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://www.roblox.com/catalog/9350274205/Vans-Black-White-Checkerboard-Umbrella",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})	
+     	setclipboard(tostring('https://www.roblox.com/catalog/9350274205/Vans-Black-White-Checkerboard-Umbrella'))		
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/FEFlyingUmbrella/main/source'))()		
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Katana [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://www.roblox.com/catalog/7548993875/Slasher",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+setclipboard(tostring('https://www.roblox.com/catalog/7548993875/Slasher'))    
+    loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\39\104\116\116\112\115\58\47\47\103\105\116\104\117\98\46\99\111\109\47\73\99\121\49\82\90\47\56\117\103\106\115\108\97\115\104\101\114\99\111\110\118\101\114\116\54\55\102\121\118\104\98\106\118\104\98\113\102\115\100\120\47\114\97\119\47\109\97\105\110\47\55\103\117\98\106\110\105\118\56\121\55\116\103\121\98\117\106\105\56\54\102\103\121\98\39\41\41\40\41\10")()
+  	end    
+})
+
+FeTab:Button({
+	Title = "Sad Boy [R6 & R15]",
+	Callback = function()
+	   WindUI:Notify({
+	Title = "No necessary hats or items needed",
+	Desc = "No necessary hats or items needed",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    loadstring(game:HttpGet("https://pastebin.com/raw/hgPJbwF0"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Pet Dog [R6 & R15]",
+	Callback = function()
+	   WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/Fsf3rujC",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/Fsf3rujC'))     
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/petdog/main/feop"))()		
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Rocket [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://raw.githubusercontent.com/KRNL2/ferocket/main/hats",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://raw.githubusercontent.com/KRNL2/ferocket/main/hats'))
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/ferockett/main/source"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Giant Cube Man [R6 Only]",
+	Callback = function()
+    	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://raw.githubusercontent.com/KRNL2/giantcubeman/main/hats",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    	setclipboard(tostring('https://raw.githubusercontent.com/KRNL2/giantcubeman/main/hats'))
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/giantcubemana/main/source"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Hoverskater [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/qXa2jMnL",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/qXa2jMnL'))
+    --Fe blue flame hoverboard
+--https://www.roblox.com/catalog/6470135113/Fan-Hand-Sign-Why-Dont-We-WDW
+--https://www.roblox.com/catalog/9560383533/Blue-Flame-Robo-Samurai
+--[GET THIS HAT BEFORE JULY 8TH]
+
+loadstring(game:HttpGet(('https://pastebin.com/raw/U2VHEdFB'),true))()
+  	end    
+})
+
+
+----------------------------------------------------------------------------------
+-- New section --
+-- FE Free Hats --
+----------------------------------------------------------------------------------
+local Section = FeTab:Section({
+	Title = "FE Free Hats"
+})
+
+
+FeTab:Button({
+	Title = "Zombie [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/rFiVzH3Q",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	    setclipboard(tostring('https://pastebin.com/raw/rFiVzH3Q')) 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/FEZOM/main/zombie"))();
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Gun [R6]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/prWGNSPB",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/prWGNSPB'))     
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/gun/main/m40gun"))();
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Soccer Ball [R15 & R6]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/bWXNFt7T",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	    	setclipboard(tostring('https://pastebin.com/raw/bWXNFt7T'))
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/fes/main/soccerball"))();
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Titan Fling [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/FLLRSBG1",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/FLLRSBG1'))    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/TitanFling/main/op"))();
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Fake VR [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Successfully loaded!",
+	Desc = "No hats required, your script has loaded.",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/fefake/main/vr"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Hat Orbit [R6 & R15]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Commands:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/jwAckWQ5",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/jwAckWQ5')) 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/hatspin/main/cool"))()
+  	end    
+})
+
+
+----------------------------------------------------------------------------------
+-- New section --
+-- FE Paid Hats--
+----------------------------------------------------------------------------------
+local Section = FeTab:Section({
+	Title = "FE Paid Hats"
+})
+
+
+FeTab:Button({
+	Title = "Demon [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/4YzZwE6C",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/4YzZwE6C'))	    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/demonscript/main/source"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "WideBoy [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hat:",
+	Desc = "Link copied to clipboard, https://www.roblox.com/catalog/5074143464/Blue-Energy-Wings",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://www.roblox.com/catalog/5074143464/Blue-Energy-Wings'))
+    loadstring(game:HttpGet('https://paste.ee/r/FYx2k', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Tank V2 [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/EjNBRXGR",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/EjNBRXGR'))
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/fetankv2/main/source"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Block Car [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/tdch8JYU",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/tdch8JYU'))    
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/FEBlockcar/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Among Us V3 [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/3EJZEwhW",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/3EJZEwhW'))     
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/amongusv3/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Hammer Arm [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/3fiV0N5s",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/3fiV0N5s'))   
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/hammerarm/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Flying Gunner [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/LjY7qZSq",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/LjY7qZSq')) 
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/flyinggunner/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Block Hammer [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://controlc.com/1becc5a1",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://controlc.com/1becc5a1')) 
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/Blockhammer/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Red Samurai [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hat:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/B8F9HtwE",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/B8F9HtwE'))
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/kakabok1233453/asdasda/main/Red%20Samurai'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Minecart [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hat:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/k7VcbXBi",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/k7VcbXBi'))    
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/kakabok1233453/asdasda/main/Minecart'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Snake [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/Zqx7gxvJ",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/Zqx7gxvJ'))   
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/fesnake/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Road Rogue [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/Leh4NSzr",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/Leh4NSzr')) 	    
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/roadrogue/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Propeller [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/BWhBkH54",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/BWhBkH54'))	    
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/propellerman/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Cop [R6 Only]",
+	Callback = function()
+	WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/JySNEdjA",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+	setclipboard(tostring('https://pastebin.com/raw/JySNEdjA'))    
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/fecop/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Achromatic Glitcher [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/8hNKnjq1",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/8hNKnjq1'))
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/feglitcher/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Void Boss [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/4zNuAnzL",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://pastebin.com/raw/4zNuAnzL'))
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/voidboss/main/source', true))()	
+  	end    
+})
+
+
+
+FeTab:Button({
+	Title = "Jeep [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hat:",
+	Desc = "Link copied to clipboard, https://www.roblox.com/catalog/9666085843/DESERT-BEEP",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    setclipboard(tostring('https://www.roblox.com/catalog/9666085843/DESERT-BEEP'))	
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/jeepdarkeccentric/main/source'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Baseball Bat [R6 Only]",
+	Callback = function()
+	   WindUI:Notify({
+	Title = "Necessary hat:",
+	Desc = "Link copied to clipboard, https://www.roblox.com/catalog/7063113820/Aluminium-Baseball-Bat",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://www.roblox.com/catalog/7063113820/Aluminium-Baseball-Bat'))
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/baseballbatfe/main/source'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Winged Gunner [R6 Only]",
+	Callback = function()
+	   WindUI:Notify({
+	Title = "Necessary hat:",
+	Desc = "Link copied to clipboard, https://raw.githubusercontent.com/KRNL2/hatsforwingedgunner/main/hats",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://raw.githubusercontent.com/KRNL2/hatsforwingedgunner/main/hats'))
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/wingedgunner/main/source'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Walking Cube V2 [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Walking Cube V2",
+	Desc = "Link copied to clipboard, https://www.roblox.com/catalog/5461538290/Sandwich-Costume",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://www.roblox.com/catalog/5461538290/Sandwich-Costume'))    
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/FEWalkingCubeV2/main/source'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Shotgun [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://raw.githubusercontent.com/KRNL2/feshotgunhats/main/hats",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://raw.githubusercontent.com/KRNL2/feshotgunhats/main/hats'))        
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/feshotgun/main/source'),true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Sheep [R6 Only]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Necessary hats:",
+	Desc = "Link copied to clipboard, https://pastebin.com/raw/j9B201MY",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://pastebin.com/raw/j9B201MY'))   
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/KRNL2/fesheep/main/source'),true))()
+  	end    
+})
+
+
+----------------------------------------------------------------------------------
+-- New Section --
+-- FE No Hats -- 
+----------------------------------------------------------------------------------
+local Section = FeTab:Section({
+	Title = "FE No Hats"
+})
+
+
+FeTab:Button({
+	Title = "Small Avatar V2 [R15 Only] [Scale]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Scale:",
+	Desc = "Link copied to clipboard, https://raw.githubusercontent.com/KRNL2/smallavatarscale/main/source",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://raw.githubusercontent.com/KRNL2/smallavatarscale/main/source')) 
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/smallavatarv2/main/source', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Titan [R15 Only] [Scale]",
+	Callback = function()
+	    WindUI:Notify({
+	Title = "Scale:",
+	Desc = "Link copied to clipboard, https://github.com/KRNL2/bodytype/blob/main/titan",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	setclipboard(tostring('https://github.com/KRNL2/bodytype/blob/main/titan'))    
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/fesizechanger/main/titan', true))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Winged Human [R6 Only]",
+	Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/fewinged/main/human"))()	
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Dog [R6 Only]",
+	Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/fedog/main/animation"))();
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Huge Leg [R15 Only]",
+	Callback = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/DigitalityScripts/roblox-scripts/main/Leg%20Resize'))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Ragdoll Death [R6 Only]",
+	Callback = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/ragdolldeath/main/source'))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Walk on Walls [R6 & R15]",
+	Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Invisibility [R15 Only]",
+	Callback = function()
+    local removeNametags = false -- remove custom billboardgui nametags from hrp, could trigger anticheat
+
+local plr = game:GetService("Players").LocalPlayer
+local character = plr.Character
+local hrp = character.HumanoidRootPart
+local old = hrp.CFrame
+
+if not character:FindFirstChild("LowerTorso") or character.PrimaryPart ~= hrp then
+return print("unsupported")
+end
+
+if removeNametags then
+local tag = hrp:FindFirstChildOfClass("BillboardGui")
+if tag then tag:Destroy() end
+
+hrp.ChildAdded:Connect(function(item)
+if item:IsA("BillboardGui") then
+task.wait()
+item:Destroy()
+end
+end)
+end
+
+local newroot = character.LowerTorso.Root:Clone()
+hrp.Parent = workspace
+character.PrimaryPart = hrp
+character:MoveTo(Vector3.new(old.X,9e9,old.Z))
+hrp.Parent = character
+task.wait(0.5)
+newroot.Parent = hrp
+hrp.CFrame = old
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Mouse Fling [R6 Only]",
+	Callback = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/mousefling/main/source'))()
+  	end    
+})
+
+
+FeTab:Button({
+	Title = "Creepy Crawler [R6 Only]",
+	Callback = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/KRNL2/-FeCreepyCrawler/main/anice'))()
+  	end    
+})
+
+
+--admins
+
+AdminsTab:Section({ Title = "Admin Gui" })
+
+AdminsTab:Button({
+    Title = "Infinite Yield Delta ",
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/mobile-delta-inf-yield/main/deltainfyield.txt"))()
+        end
+})
+
+AdminsTab:Button({
+    Title = "Infinite Yield",
+    Callback = function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+        end
+})
+AdminsTab:Button({
+    Title = "Nameless Admin",
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+        end
+})
+
+AdminsTab:Button({
+    Title = "Proton Admin",
+    Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/HuT90Wbu"))()
+        end
+})
+
+AdminsTab:Button({
+    Title = "Reviz Admin",
+    Callback = function()
+    loadstring(game:HttpGet('https://pastebin.com/ibFPdiF7'))()
+        end
+})
+
+
+
+
+AdminsTab:Section({ Title = "Exucator Gui" })
+
+AdminsTab:Button({
+    Title = "Fluxus",
+    Callback = function()
+    loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Fluxus-Coral-Remake-7112"))()
+        end
+})
+
+
+AdminsTab:Button({
+    Title = "Delta Old",
+    Callback = function()
+    loadstring(game:HttpGet("https://pastefy.app/g7LPD8er/raw"))()
+        end
+})
+
+
+AdminsTab:Button({
+    Title = "Arceus X3",
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/chillz-workshop/main/Arceus%20X%20V3"))()
+        end
+})
+
+
+
+AdminsTab:Button({
+    Title = "Vega",
+    Callback = function()
+    loadstring(game:HttpGet("https://pastefy.app/fDluWteo/raw"))()
+        end
+})
+AdminsTab:Button({
+    Title = "Krnl",
+    Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/M3HjLPU7"))()
+        end
+})
+
+AdminsTab:Button({
+    Title = "Synapse X",
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/Chillz-s-scripts/main/Synapse-X-Remake.lua"))()
+        end
+})
+
+AdminsTab:Button({
+    Title = "Kiwi X",
+    Callback = function()
+    loadstring(game:HttpGet("https://pastefy.app/YkNSufkg/raw"))()
+        end
+})
+
+
+
+ScriptTab:Section({ Title = "Lear Scirpts " })
+ScriptTab:Button({
+    Title = "Lear Auto Piano ",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Emircxy/Lear/refs/heads/main/Auto%20piano"))()
+    end
+})
+
+ScriptTab:Button({
+    Title = "Lear Universal Aimbot & Esp ",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/5rwtLBN1'))()
+    end
+})
+
+
+ScriptTab:Section({ Title = "Universal Scirpts" })
+
+ScriptTab:Button({
+    Title = "Fake Lag ",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/VM3b0Thg'))()
+    end
+})
+
+
+
+
+
+
+ScriptTab:Button({
+    Title = "Auto Walk and Jump",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/srtepuBM'))()
+    end
+})
+
+ScriptTab:Button({
+    Title = "Illusion",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe/main/obf_11l7Y131YqJjZ31QmV5L8pI23V02b3191sEg26E75472Wl78Vi8870jRv5txZyL1.lua.txt"))()
+    end
+})
+
+ScriptTab:Button({
+    Title = "Jump Button",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/qhBY6frK'))();
+    end
+})
+
+
+
+ScriptTab:Button({
+    Title = "Invisible Gui",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Invisible%20Gui'))()
+    end
+})
+
+ScriptTab:Button({
+    Title = "Walk On Walls",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+    end
+})
+
+
+ScriptTab:Button({
+    Title = "Shiftlock",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/MxxbzWR2",true))()
+    end
+})
+
+--Trolls
+
+
+TrollsTab:Section({ Title = "FE Troll Scirpts" })
+
+TrollsTab:Button({
+    Title = "Netless",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/pXWQxpLK'))()
+    end
+})
+
+
+TrollsTab:Button({
+    Title = "Fling All",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/zqyDSUWX"))()
+    end
+})
+
+TrollsTab:Button({
+    Title = "Fling Random",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/1FaK0DnK'))()
+    end
+})
+
+TrollsTab:Button({
+    Title = "Touch Fling",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/pXWQxpLK'))()
+    end
+})
+
+TrollsTab:Button({
+    Title = "Click Fling",
+    Callback = function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/obf_5wpM7bBcOPspmX7lQ3m75SrYNWqxZ858ai3tJdEAId6jSI05IOUB224FQ0VSAswH.lua.txt'), true))()
+    end
+})
+
+TrollsTab:Section({ Title = "Anti Trolls" })
+
+TrollsTab:Button({
+    Title = "Anti Filing",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/h8sLkBP0"))()
+    end
+})
+
+TrollsTab:Button({
+    Title = "Anti Filing 2",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/tMHP76Ex"))()
+    end
+})
+
+
+TrollsTab:Button({
+    Title = "Anti Bang",
+    Callback = function()
+        loadstring(game:HttpGet('https://github.com/AnthonyIsntHere/anthonysrepository/raw/main/scripts/Anti%20Bang.lua'))()
+    end
+})
+
+
+TrollsTab:Button({
+    Title = "Anti Tool Kill",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/Anti%20Tool%20Kill.lua'))()
+    end
+})
+
+
+
+TrollsTab:Button({
+    Title = "Anti Afk",
+    Callback = function()
+        		loadstring(game:HttpGet("https://raw.githubusercontent.com/evxncodes/mainroblox/main/anti-afk", true))()
+    end
+})
+
+TrollsTab:Button({
+    Title = "Anti Kick",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/gsxvWvnj"))()
+    end
+})
+
+
+
+
+
+
+
+--Hub
+
+HubTab:Section({ Title = "Sky Hub" })
+HubTab:Paragraph({
+    Title = "Sky Hub",
+    Desc = "Made by yofriendfromschool1",
+    Image = "rbxassetid://87127373849667", -- lucide or URL or rbxassetid://
+    ImageSize = 50
+    
+})
+HubTab:Code({
+    Title = "",
+    Code = [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub/main/SkyHub.txt"))()
+    ]],
+})
+
+HubTab:Button({
+    Title = "Execute",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub/main/SkyHub.txt"))()
+    end
+})
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------
+
+
+
+
+
+
+ToolsTab:Section({ Title = "Tools" })
+
+
+ToolsTab:Button({
+    Title = "All Tool Giver V1",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Tools-Giver-Some-Tools-Will-Fe-7865"))()
+    end
+})
+
+
+ToolsTab:Section({ Title = "Admin Tools" })
+ToolsTab:Button({
+    Title = "Noclip Tool",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/by83MUJ4/raw"))()
+    end
+})
+
+ToolsTab:Button({
+    Title = "Run tool",
+    Callback = function()
+        mouse = game.Players.LocalPlayer:GetMouse()
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = "Run"
+tool.Activated:connect(function()
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
+end)
+tool.Parent = game.Players.LocalPlayer.Backpack
+    end
+})
+
+ToolsTab:Button({
+    Title = "Fling Tool",
+    Callback = function()
+        loadstring(game:HttpGet(('https://pastefy.ga/xBdd9GId/raw'),true))()
+    end
+})
+
+
+ToolsTab:Button({
+    Title = "Tp Tool",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/Lhg31PG6/raw"))()
+    end
+})
+
+
+
+ToolsTab:Button({
+    Title = "F3x Tool",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/tJg8ZaGs"))()
+    end
+})
+
+ToolsTab:Button({
+    Title = "BTools",
+    Callback = function()
+        loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()
+    end
+})
+
+
+
+
+DbgTab:Section({ Title = "Debuggers" })
+
+
+UserInputService = game:GetService("UserInputService")
+local IsOnMobile = table.find({
+	Enum.Platform.IOS,
+	Enum.Platform.Android
+}, UserInputService:GetPlatform())
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+
+
+
+
+DbgTab:Button({
+    Title = "Dex",
+    Callback = function()
+        if IsOnMobile then
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/Dex/Mobile%20Dex%20Explorer.txt"))()
+		else
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+		end
+	end
+})
+
+DbgTab:Button({
+    Title = "SimpleSpy V3",
+    Callback = function()
+        if IsOnMobile then
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/SimpleSpyV3/mobilemain.lua"))()
+		else
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
+		end
+	end
+})
+
+DbgTab:Button({
+    Title = "TurtleSpy",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Turtle-Brand/Turtle-Spy/main/source.lua", true))()
+	end
+})
+
+
+
+
+
+
+
+
+
+DbgTab:Section({ Title = "Helper" })
+
+DbgTab:Button({
+    Title = "Fps Counter",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Sempiller/sdluniversal/main/fpsviewer.lua"))()
+	end
+})
+
+DbgTab:Button({
+    Title = "Lag Reducer",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/RW7ZT29m'))()
+	end
+})
+
+
+DbgTab:Button({
+    Title = "KeyBoard",
+    Callback = function()
+        loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-MobileKeyboard-8101"))()
+	end
+})
+
+DbgTab:Button({
+    Title = "Auto Clicker",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/JustEzpi/ROBLOX-Scripts/main/ROBLOX_AutoClicker"))()
+	end
+})
+
+
+
+
+DbgTab:Section({ Title = "RemoteEvent" })
+
+
+DbgTab:Button({
+    Title = "Game Tool Giver",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gametoolgiver.lua"))()
+	end
+})
+
+DbgTab:Button({
+    Title = "Game Tool Equipper",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gametoolequipper.lua"))()
+	end
+})
+
+DbgTab:Button({
+    Title = "Gui & UI Viewer",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gameuigiver.lua"))()
+	end
+})
+
+
+DbgTab:Button({
+    Title = "RemoteEvent",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gameremotefireserver.lua"))()
+	end
+})
+
+
+
