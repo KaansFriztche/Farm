@@ -1696,7 +1696,7 @@ AdminsTab:Button({
 
 
 
-AdminsTab:Section({ Title = "Exucator Gui" })
+AdminsTab:Section({ Title = "Executor Ui" })
 
 AdminsTab:Button({
     Title = "Fluxus",
@@ -2144,6 +2144,7 @@ DbgTab:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gameremotefireserver.lua"))()
 	end
 })
+
 
 
 
