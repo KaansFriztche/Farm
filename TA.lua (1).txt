@@ -1,0 +1,1129 @@
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Players = game:GetService("Players")
+local Teams = game:GetService("Teams")
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local UIS = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+
+-- Gradient fonksiyonun
+function gradient(text, startColor, endColor)
+	local result = ""
+	local length = #text
+	for i = 1, length do
+		local t = (i - 1) / math.max(length - 1, 1)
+		local r = math.floor((startColor.R + (endColor.R - startColor.R) * t) * 255)
+		local g = math.floor((startColor.G + (endColor.G - startColor.G) * t) * 255)
+		local b = math.floor((startColor.B + (endColor.B - startColor.B) * t) * 255)
+		local char = text:sub(i, i)
+		result = result .. "<font color=\"rgb(" .. r ..", " .. g .. ", " .. b .. ")\">" .. char .. "</font>"
+	end
+	return result
+end
+
+-- Uyarı popup
+local Confirmed = false
+WindUI:Popup({
+	Title = "Uyarı! Bu script oyundan banlanmanıza sebep olabilir.",
+	Icon = "info",
+	Content = "Yapımcı " .. gradient("Echelon", Color3.fromHex("#00FF87"), Color3.fromHex("#60EFFF")) .. " ",
+	Buttons = {
+		{ Title = "Reddet", Callback = function() end, Variant = "Secondary" },
+		{ Title = "Devam Et", Icon = "arrow-right", Callback = function() Confirmed = true end, Variant = "Primary" }
+	}
+})
+repeat task.wait() until Confirmed
+
+-- UI
+local Window = WindUI:CreateWindow({
+	Title = "Echelon Hub",
+	Icon = "rbxassetid://136271753706984",
+	Author = "V1.0",
+	Folder = "PrisonHacks",
+	Size = UDim2.fromOffset(650, 350),
+	Transparent = true,
+	Theme = "Dark",
+	SideBarWidth = 200,
+	User = {
+		Enabled = true,
+		Anonymous = false,
+		Callback = function() print("User clicked") end,
+	},
+})
+
+-- Sekmeler
+local MainTab = Window:Tab({ Title = "Yapımcı", Icon = "info" })
+local SettingsTab = Window:Tab({ Title = "Ayarlar", Icon = "settings" })
+local LogTab = Window:Tab({ Title = "Güncellemeler", Icon = "logs" })
+
+Window:Divider()
+local EspTab = Window:Tab({ Title = "Esp", Icon = "eye" })
+local PlayerTab = Window:Tab({ Title = "Karakter", Icon = "circle-user" })
+local FeTab = Window:Tab({ Title = "Fe", Icon = "joystick" })
+local ChatTab = Window:Tab({ Title = "Chatlogs", Icon = "message-square-more" })
+
+Window:Divider()
+local MapTab = Window:Tab({ Title = "Teleportlar", Icon = "map" })
+local AutoTab = Window:Tab({ Title = "Otomatik Farmlar", Icon = "calendar-sync" })
+local TrollTab = Window:Tab({ Title = "Troll", Icon = "laugh" })
+
+
+--local
+local GameId = game.PlaceId
+local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local plrs = game:GetService("Players")
+local plr = plrs.LocalPlayer
+local plrname = plr.Name
+local plrid = plr.UserId
+local plrchr = plr.Character
+local plrage = plr.AccountAge
+local plrcount = #plrs:GetPlayers()
+
+MainTab:Paragraph({
+    Title = "Oyuncu Bilgileri",
+    Desc = "Oyuncu Adı: " .. plrname ..
+           "\nOyuncu ID: " .. plrid ..
+           "\nKarakter: " .. tostring(plrchr) ..
+           "\nHesap Yaşı: " .. plrage .. " gün" ..
+           "\nOyuncu Sayısı: " .. plrcount ..
+           "\nOyun Adı: " .. GameName ..
+           "\nOyun ID: " .. GameId,
+    Image = "computer",
+    ImageSize = 50
+})
+
+MainTab:Button({
+    Title = "Discord Bağlantısı",
+    Desc = "5xZXaSr3Nq",
+    Callback = function() 
+        WindUI:Notify({
+            Title = "Bağlantı kopyalandı:",
+            Content = "https://discord.gg/5xZXaSr3Nq",
+            Icon = "link",
+            Duration = 4,
+        })
+        setclipboard("https://discord.gg/5xZXaSr3Nq")
+    end
+})
+
+MainTab:Button({
+    Title = "YouTube Bağlantısı",
+    Desc = "Echelon",
+    Callback = function() 
+        WindUI:Notify({
+            Title = "Bağlantı kopyalandı",
+            Content = "https://m.youtube.com/channel/UCMPNe8f-2EvJefwZgch3G9A",
+            Icon = "link",
+            Duration = 4,
+        })
+        setclipboard("https://m.youtube.com/channel/UCMPNe8f-2EvJefwZgch3G9A")
+    end
+})
+
+MainTab:Paragraph({
+    Title = "Yapımcı: Echelon",
+    Desc = "Bu script hâlâ geliştiriliyor, herhangi bir hata varsa lütfen bana bildir, teşekkürler",
+    Image = "rbxassetid://133755542334730",
+    ImageSize = 100
+})
+
+MainTab:Paragraph({
+    Title = "E-Posta:",
+    Desc = "help@echelon.rf.gd",
+    Image = "mail-check",
+    ImageSize = 50
+})
+
+-- Ayarlar
+
+SettingsTab:Section({ Title = "Sunucular" })
+
+SettingsTab:Button({
+    Title = "Sunucu Değiştir",
+    Callback = function()
+        local module = loadstring(game:HttpGet"https://raw.githubusercontent.com/LeoKholYt/roblox/main/lk_serverhop.lua")()
+        module:Teleport(game.PlaceId)
+    end
+})
+
+SettingsTab:Button({
+    Title = "Otomatik Katıl",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/9fYwjt6n"))()
+    end
+})
+
+SettingsTab:Button({
+    Title = "Yeniden Katıl",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/1gtVMUz3"))()
+    end
+})
+
+SettingsTab:Button({
+    Title = "Küçük Sunucu",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/QQMDVUHL"))() 
+    end
+})
+
+SettingsTab:Section({ Title = "Kısayol Tuşu" })
+
+local Keybind = SettingsTab:Keybind({
+    Title = "Kısayol Tuşu",
+    Desc = "Pencereyi aç/kapat",
+    Value = "",
+    CanChange = true,
+    Callback = function(k)
+        if not KeybindClicked then
+            Window:Close()
+        else
+            Window:Open()
+        end
+        KeybindClicked = not KeybindClicked
+    end
+})
+
+
+local HttpService = game:GetService("HttpService")
+
+local folderPath = "WindUI"
+makefolder(folderPath)
+
+local function DosyaKaydet(dosyaAdi, veri)
+    local dosyaYolu = folderPath .. "/" .. dosyaAdi .. ".json"
+    local jsonData = HttpService:JSONEncode(veri)
+    writefile(dosyaYolu, jsonData)
+end
+
+local function DosyaYukle(dosyaAdi)
+    local dosyaYolu = folderPath .. "/" .. dosyaAdi .. ".json"
+    if isfile(dosyaYolu) then
+        local jsonData = readfile(dosyaYolu)
+        return HttpService:JSONDecode(jsonData)
+    end
+end
+
+local function DosyalariListele()
+    local dosyalar = {}
+    for _, dosya in ipairs(listfiles(folderPath)) do
+        local dosyaAdi = dosya:match("([^/]+)%.json$")
+        if dosyaAdi then
+            table.insert(dosyalar, dosyaAdi)
+        end
+    end
+    return dosyalar
+end
+
+SettingsTab:Section({ Title = "Pencere" })
+
+local temaDegerleri = {}
+for name, _ in pairs(WindUI:GetThemes()) do
+    table.insert(temaDegerleri, name)
+end
+
+local temaSecimi = SettingsTab:Dropdown({
+    Title = "Tema Seç",
+    Multi = false,
+    AllowNone = false,
+    Value = nil,
+    Values = temaDegerleri,
+    Callback = function(tema)
+        WindUI:SetTheme(tema)
+    end
+})
+temaSecimi:Select(WindUI:GetCurrentTheme())
+
+local SaydamlikAyarla = SettingsTab:Toggle({
+    Title = "Pencere Saydamlığını Aç/Kapat",
+    Callback = function(e)
+        Window:ToggleTransparency(e)
+    end,
+    Value = WindUI:GetTransparency()
+})
+
+SettingsTab:Section({ Title = "Kaydet" })
+
+local dosyaAdiInput = ""
+SettingsTab:Input({
+    Title = "Dosya Adı Yaz",
+    PlaceholderText = "Dosya adını girin",
+    Callback = function(text)
+        dosyaAdiInput = text
+    end
+})
+
+SettingsTab:Button({
+    Title = "Dosyayı Kaydet",
+    Callback = function()
+        if dosyaAdiInput ~= "" then
+            DosyaKaydet(dosyaAdiInput, { Transparent = WindUI:GetTransparency(), Theme = WindUI:GetCurrentTheme() })
+        end
+    end
+})
+
+SettingsTab:Section({ Title = "Yükle" })
+
+local dosyaSecimi
+local dosyalar = DosyalariListele()
+
+dosyaSecimi = SettingsTab:Dropdown({
+    Title = "Dosya Seç",
+    Multi = false,
+    AllowNone = true,
+    Values = dosyalar,
+    Callback = function(seciliDosya)
+        dosyaAdiInput = seciliDosya
+    end
+})
+
+SettingsTab:Button({
+    Title = "Dosyayı Yükle",
+    Callback = function()
+        if dosyaAdiInput ~= "" then
+            local veri = DosyaYukle(dosyaAdiInput)
+            if veri then
+                WindUI:Notify({
+                    Title = "Dosya Yüklendi",
+                    Content = "Yüklenen veri: " .. HttpService:JSONEncode(veri),
+                    Duration = 5,
+                })
+                if veri.Transparent then 
+                    Window:ToggleTransparency(veri.Transparent)
+                    SaydamlikAyarla:SetValue(veri.Transparent)
+                end
+                if veri.Theme then WindUI:SetTheme(veri.Theme) end
+            end
+        end
+    end
+})
+
+SettingsTab:Button({
+    Title = "Dosyayı Üzerine Yaz",
+    Callback = function()
+        if dosyaAdiInput ~= "" then
+            DosyaKaydet(dosyaAdiInput, { Transparent = WindUI:GetTransparency(), Theme = WindUI:GetCurrentTheme() })
+        end
+    end
+})
+
+SettingsTab:Button({
+    Title = "Listeyi Yenile",
+    Callback = function()
+        dosyaSecimi:Refresh(DosyalariListele())
+    end
+})
+
+LogTab:Paragraph({
+    Title = "V1.1 Güncellemesi",
+    Desc = "Yeni Arayüz | Yeni Fonksiyonlar | Mobil Desteği | Hata Düzeltmeleri",
+    Image = "upload", -- lucide veya URL veya rbxassetid://
+    ImageSize = 60
+})
+
+
+-- Aktif ESP tarzlarını takip et
+local enabledESPStyles = {
+	Name = false,
+	Box = true,
+}
+
+EspTab:Dropdown({
+	Title = "ESP Modu Seç",
+	Values = { "İsim", "Box" },
+	Value = { "Box" },
+	Multi = true,
+	AllowNone = false,
+	Callback = function(selected)
+		enabledESPStyles = { Name = false, Box = false }
+		for _, v in pairs(selected) do
+			if v == "İsim" then
+				enabledESPStyles.Name = true
+			elseif v == "Box" then
+				enabledESPStyles.Box = true
+			end
+		end
+	end
+})
+
+-- Takım bazlı toggle sistemi
+local espEnabled = {}
+local function createESP(player, teamColor)
+	local char = player.Character
+	if not char then return end
+
+	-- Box ESP (Highlight)
+	if enabledESPStyles.Box and not char:FindFirstChild("ESP_Highlight") then
+		local highlight = Instance.new("Highlight")
+		highlight.Name = "ESP_Highlight"
+		highlight.FillTransparency = 0.75
+		highlight.OutlineTransparency = 0
+		highlight.FillColor = teamColor
+		highlight.OutlineColor = Color3.new(0,0,0)
+		highlight.Adornee = char
+		highlight.Parent = char
+	end
+
+	-- Name ESP (Billboard)
+	if enabledESPStyles.Name and not char:FindFirstChild("ESP_Name") then
+		local head = char:FindFirstChild("Head")
+		if head then
+			local billboard = Instance.new("BillboardGui")
+			billboard.Name = "ESP_Name"
+			billboard.Adornee = head
+			billboard.Size = UDim2.new(0, 100, 0, 30)
+			billboard.AlwaysOnTop = true
+			billboard.StudsOffset = Vector3.new(0, 2, 0)
+
+			local label = Instance.new("TextLabel", billboard)
+			label.Size = UDim2.new(1, 0, 1, 0)
+			label.BackgroundTransparency = 1
+			label.Text = player.Name
+			label.TextColor3 = teamColor
+			label.TextStrokeTransparency = 0.5
+			label.TextScaled = true
+
+			billboard.Parent = head
+		end
+	end
+end
+
+local function removeESP(player)
+	local char = player.Character
+	if not char then return end
+	if char:FindFirstChild("ESP_Highlight") then char.ESP_Highlight:Destroy() end
+	if char:FindFirstChild("Head") and char.Head:FindFirstChild("ESP_Name") then
+		char.Head.ESP_Name:Destroy()
+	end
+end
+
+local function updateESPForTeam(team)
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player.Team == team then
+			if espEnabled[team.Name] then
+				createESP(player, team.TeamColor.Color)
+			else
+				removeESP(player)
+			end
+		end
+	end
+end
+
+-- Toggle'ları oluştur
+for _, team in pairs(Teams:GetChildren()) do
+	espEnabled[team.Name] = false
+
+	EspTab:Toggle({
+		Title = team.Name .. " ESP",
+		Desc = "Bu takımdakilere ESP uygula",
+		Icon = "eye",
+		Type = "Checkbox",
+		Default = false,
+		Callback = function(state)
+			espEnabled[team.Name] = state
+			updateESPForTeam(team)
+		end
+	})
+end
+
+-- Oyuncular spawn olunca yeniden uygula
+local function connectCharacterESP(player)
+	player.CharacterAdded:Connect(function()
+		task.wait(1)
+		if player.Team and espEnabled[player.Team.Name] then
+			createESP(player, player.Team.TeamColor.Color)
+		end
+	end)
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+	connectCharacterESP(player)
+end
+
+Players.PlayerAdded:Connect(function(player)
+	connectCharacterESP(player)
+end)
+
+-- TEAM NOTIFICATION SYSTEM
+local LastTeams = {}
+local teamNotifEnabled = false
+
+for _, player in ipairs(Players:GetPlayers()) do
+    LastTeams[player.UserId] = player.Team and player.Team.Name or "None"
+end
+
+Players.PlayerAdded:Connect(function(player)
+    LastTeams[player.UserId] = player.Team and player.Team.Name or "None"
+end)
+
+local function sendNotification(message)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Takım değiştirmek",
+        Text = message,
+        Duration = 5
+    })
+end
+
+RunService.Heartbeat:Connect(function()
+    if not teamNotifEnabled then return end
+
+    for _, player in ipairs(Players:GetPlayers()) do
+        local currentTeam = player.Team and player.Team.Name or "None"
+        local lastTeam = LastTeams[player.UserId]
+
+        if currentTeam ~= lastTeam then
+            LastTeams[player.UserId] = currentTeam
+            if player ~= Players.LocalPlayer then
+                sendNotification(player.Name .. " takıma degsitirildi '" .. currentTeam .. "'!")
+            end
+        end
+    end
+end)
+
+PlayerTab:Toggle({
+    Title = "Takım bildirimi",
+    Desc = "Oyuncular takım değiştirdiğinde bildirim alır",
+    Icon = "bell",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+        teamNotifEnabled = state
+    end
+})
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+PlayerTab:Slider({
+    Title = "FOV",
+    Step = 1,
+    Value = {
+        Min = 70,
+        Max = 120,
+        Default = 70,
+    },
+    Callback = function(value)
+        workspace.CurrentCamera.FieldOfView = value
+    end
+})
+
+PlayerTab:Slider({
+    Title = "Hız",
+    Step = 1,
+    Value = {
+        Min = 16,
+        Max = 200,
+        Default = 16,
+    },
+    Callback = function(value)
+        local char = LocalPlayer.Character
+        if char then
+            char:FindFirstChildOfClass("Humanoid").WalkSpeed = value
+        end
+    end
+})
+
+PlayerTab:Slider({
+    Title = "Zıplama Gücü",
+    Step = 1,
+    Value = {
+        Min = 50,
+        Max = 300,
+        Default = 50,
+    },
+    Callback = function(value)
+        local char = LocalPlayer.Character
+        if char then
+            char:FindFirstChildOfClass("Humanoid").JumpPower = value
+        end
+    end
+})
+
+PlayerTab:Slider({
+    Title = "Yerçekimi",
+    Step = 1,
+    Value = {
+        Min = 0,
+        Max = 196,
+        Default = 196,
+    },
+    Callback = function(value)
+        workspace.Gravity = value
+    end
+})
+
+PlayerTab:Slider({
+    Title = "Yerden Yükseklik",
+    Step = 1,
+    Value = {
+        Min = 0,
+        Max = 100,
+        Default = 0,
+    },
+    Callback = function(value)
+        local char = LocalPlayer.Character
+        if char then
+            char:FindFirstChildOfClass("Humanoid").HipHeight = value
+        end
+    end
+})
+
+PlayerTab:Slider({
+    Title = "Karakter Boyutu",
+    Step = 0.1,
+    Value = {
+        Min = 0.5,
+        Max = 3,
+        Default = 1,
+    },
+    Callback = function(value)
+        local char = LocalPlayer.Character
+        if char then
+            for _, part in pairs(char:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Size = Vector3.new(2, 2, 1) * value
+                end
+            end
+        end
+    end
+})
+
+PlayerTab:Slider({
+    Title = "Zaman",
+    Value = {
+        Min = 0,
+        Max = 8,
+        Default = 0,
+    },
+    Callback = function(p) game:GetService("Lighting").ClockTime = p end
+})
+
+
+getgenv().XRayEnabled = false
+
+PlayerTab:Toggle({
+    Title = "X-Ray",
+    Desc = "",
+    Icon = "eye-off",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+        getgenv().XRayEnabled = state
+        for _, obj in ipairs(workspace:GetDescendants()) do
+            if obj:IsA("BasePart") and not obj:IsDescendantOf(game.Players.LocalPlayer.Character) then
+                obj.LocalTransparencyModifier = state and 0.8 or 0
+            end
+        end
+    end
+})
+
+PlayerTab:Section({ Title = "Fly" })
+
+
+PlayerTab:Button({
+    Title = "Pc fly",
+    Desc = "Key Q",
+    Callback = function()  
+loadstring(game:HttpGet("https://pastebin.com/raw/jpRKGvvi",true))()
+end
+})
+
+
+PlayerTab:Button({
+    Title = "Pc Invisible",
+    Desc = "Key e",
+    Callback = function()  
+loadstring(game:HttpGet("https://pastebin.com/raw/hk09qgd9"))()
+end
+})
+
+PlayerTab:Button({
+    Title = "Mobile Fly Gui",
+    Desc = "Gui",
+    Callback = function()  
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+end
+})
+
+
+PlayerTab:Section({ 
+    Title = "Anti",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+PlayerTab:Button({
+    Title = "Anti Filing",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/h8sLkBP0"))()
+    end
+})
+
+PlayerTab:Button({
+    Title = "Anti Filing 2",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/tMHP76Ex"))()
+    end
+})
+
+
+PlayerTab:Button({
+    Title = "Anti Bang",
+    Callback = function()
+        loadstring(game:HttpGet('https://github.com/AnthonyIsntHere/anthonysrepository/raw/main/scripts/Anti%20Bang.lua'))()
+    end
+})
+
+
+PlayerTab:Button({
+    Title = "Anti Tool Kill",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/Anti%20Tool%20Kill.lua'))()
+    end
+})
+
+
+
+PlayerTab:Button({
+    Title = "Anti Afk",
+    Callback = function()
+        		loadstring(game:HttpGet("https://raw.githubusercontent.com/evxncodes/mainroblox/main/anti-afk", true))()
+    end
+})
+
+PlayerTab:Button({
+    Title = "Anti Kick",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/gsxvWvnj"))()
+    end
+})
+
+
+PlayerTab:Toggle({
+    Title = "Anti-Freeze",
+    Desc = "Oyun donmalarını engeller",
+    Icon = "snowflake",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+        if state then
+            -- Karakterin donmasını engeller
+            game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
+                char:WaitForChild("Humanoid").Died:Connect(function()
+                    -- Eğer karakter donarsa, hemen sağlıklı bir şekilde geri başlatılır.
+                    game.Players.LocalPlayer:LoadCharacter()
+                end)
+            end)
+        end
+    end
+})
+
+PlayerTab:Section({ Title = "Karakter" })
+
+
+local infJumpEnabled = false
+PlayerTab:Toggle({
+    Title = "Sonsuz Zıplama",
+    Desc = "",
+    Icon = "rabbit",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+        infJumpEnabled = state
+        if state then
+            game:GetService("UserInputService").JumpRequest:Connect(function()
+                if infJumpEnabled then
+                    local char = LocalPlayer.Character
+                    if char and char:FindFirstChildOfClass("Humanoid") then
+                        char:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+                    end
+                end
+            end)
+        end
+    end
+})
+
+local noClip = false
+PlayerTab:Toggle({
+    Title = "NoClip",
+    Desc = "",
+    Icon = "box",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+        noClip = state
+        game:GetService("RunService").Stepped:Connect(function()
+            if noClip then
+                local char = LocalPlayer.Character
+                if char then
+                    for _, v in pairs(char:GetDescendants()) do
+                        if v:IsA("BasePart") and v.CanCollide == true then
+                            v.CanCollide = false
+                        end
+                    end
+                end
+            end
+        end)
+    end
+})
+
+getgenv().AutoRespawnEnabled = false
+
+PlayerTab:Toggle({
+    Title = "Otomatik Doğma",
+    Desc = "Ölünce otomatik yeniden doğar",
+    Icon = "refresh-ccw",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+        getgenv().AutoRespawnEnabled = state
+    end
+})
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
+    if getgenv().AutoRespawnEnabled then
+        char:WaitForChild("Humanoid").Died:Connect(function()
+            wait(1)
+            game.Players.LocalPlayer:LoadCharacter()
+        end)
+    end
+end)
+
+
+local aC;
+local aD;
+local aE;
+local aF;
+local aG;
+local aH;
+local aI = Client;
+local aJ = {
+    W = false,
+    S = false,
+    A = false,
+    D = false,
+    Moving = false
+}
+local aK = function()
+    if not game:GetService("Players").LocalPlayer.Character or not game:GetService("Players").LocalPlayer.Character.Head or
+        aH then
+        return
+    end
+    aC = game:GetService("Players").LocalPlayer.Character;
+    aD = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    aD.PlatformStand = true;
+    aG = workspace:WaitForChild('Camera')
+    aE = Instance.new("BodyVelocity")
+    aF = Instance.new("BodyAngularVelocity")
+    aE.Velocity, aE.MaxForce, aE.P = Vector3.new(0, 0, 0), Vector3.new(10000, 10000, 10000), 1000;
+    aF.AngularVelocity, aF.MaxTorque, aF.P = Vector3.new(0, 0, 0), Vector3.new(10000, 10000, 10000), 1000;
+    aE.Parent = aC.Head;
+    aF.Parent = aC.Head;
+    aH = true;
+    aD.Died:connect(function()
+        aH = false
+    end)
+end;
+local aL = function()
+    if not game:GetService("Players").LocalPlayer.Character or not aH then
+        return
+    end
+    game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").PlatformStand = false;
+    aE:Destroy()
+    aF:Destroy()
+    aH = false
+end;
+game:GetService("UserInputService").InputBegan:connect(function(aM, aN)
+    if aM.UserInputType == Enum.UserInputType.MouseButton1 and
+        game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) and Settings.ClickTeleport then
+        game:GetService("Players").LocalPlayer.Character:MoveTo(game.Players.LocalPlayer:GetMouse().Hit.p)
+    end
+    if aN then
+        return
+    end
+    for q, aO in pairs(aJ) do
+        if q ~= "Moving" and aM.KeyCode == Enum.KeyCode[q] then
+            aJ[q] = true;
+            aJ.Moving = true
+        end
+    end
+end)
+game:GetService("UserInputService").InputEnded:connect(function(aM, aN)
+    if aN then
+        return
+    end
+    local L = false;
+    for q, aO in pairs(aJ) do
+        if q ~= "Moving" then
+            if aM.KeyCode == Enum.KeyCode[q] then
+                aJ[q] = false
+            end
+            if aJ[q] then
+                L = true
+            end
+        end
+    end
+    aJ.Moving = L
+end)
+local aP = function(aQ)
+    return aQ * (Settings.FlySpeed or 50) / aQ.Magnitude
+end;
+game:GetService("RunService").Heartbeat:connect(function(aR)
+    if aH and aC and aC.PrimaryPart then
+        local aI = aC.PrimaryPart.Position;
+        local aS = aG.CFrame;
+        local aT, aU, aV = aS:toEulerAnglesXYZ()
+        aC:SetPrimaryPartCFrame(CFrame.new(aI.x, aI.y, aI.z) * CFrame.Angles(aT, aU, aV))
+        if aJ.Moving then
+            local au = Vector3.new()
+            if aJ.W then
+                au = au + aP(aS.lookVector)
+            end
+            if aJ.S then
+                au = au - aP(aS.lookVector)
+            end
+            if aJ.A then
+                au = au - aP(aS.rightVector)
+            end
+            if aJ.D then
+                au = au + aP(aS.rightVector)
+            end
+            aC:TranslateBy(au * aR)
+        end
+    end
+end)
+
+
+local JQ = false;
+PlayerTab:Toggle({
+    Title = "Bunny Hop",
+    Default = false,
+    Callback = function(K)  
+JQ = K;
+spawn(function()
+while wait()
+and JQ do game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Jump = true
+end
+end)
+end
+})
+
+PlayerTab:Button({
+    Title = "Reset Karakter",
+    Desc = "Reset",
+    Callback = function() game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end
+})
+
+PlayerTab:Button({
+    Title = "Reset Backpack",
+    Desc = "Reset",
+    Callback = function() local gear = game.Players.LocalPlayer.Backpack:GetChildren()
+    for i, child in ipairs(gear) do
+      child:Destroy()
+      end
+end
+})
+
+PlayerTab:Button({
+    Title = "Ölümsüzlük",
+    Callback = function()
+    loadstring(game:HttpGet("https://freenote.biz/raw/Fhpx5r5A8M"))()
+end
+})
+
+
+
+
+
+FeTab:Section({ Title = "Fe" })
+FeTab:Button({
+	Title = "Kanatlı İnsan",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/fewinged/main/human"))()	
+	end    
+})
+
+FeTab:Button({
+	Title = "Köpek",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/fedog/main/animation"))()
+	end    
+})
+
+FeTab:Button({
+	Title = "Dev Bacak",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/DigitalityScripts/roblox-scripts/main/Leg%20Resize"))()
+	end    
+})
+
+FeTab:Button({
+	Title = "Yıkılma Ölümü",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/KRNL2/ragdolldeath/main/source"))()
+	end    
+})
+
+FeTab:Button({
+	Title = "Duvarlarda Yürü",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+	end    
+})
+
+
+FeTab:Section({ Title = "Scirpts" })
+
+FeTab:Button({
+    Title = "Fake Lag ",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/VM3b0Thg'))()
+    end
+})
+
+
+FeTab:Button({
+    Title = "Otomatik yürüme ve zıplama",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/srtepuBM'))()
+    end
+})
+
+FeTab:Button({
+    Title = "Illusion",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe/main/obf_11l7Y131YqJjZ31QmV5L8pI23V02b3191sEg26E75472Wl78Vi8870jRv5txZyL1.lua.txt"))()
+    end
+})
+
+FeTab:Button({
+    Title = "Zıplama Butonu",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/qhBY6frK'))();
+    end
+})
+
+
+
+
+FeTab:Button({
+    Title = "Shiftlock",
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/MxxbzWR2",true))()
+    end
+})
+
+
+MapTab:Section({ Title = "Rota" })
+
+MapTab:Button({
+    Title = "Metro",
+    Callback = function()
+        game.Players.Player.PlayerGui.Main.Metro.Enabled = true
+        end
+})
+
+MapTab:Button({
+    Title = "Kaçış",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+        local targetPosition = Vector3.new(451.11, 13.49, -1244.21)
+        humanoidRootPart.CFrame = CFrame.new(targetPosition)
+    end
+})
+
+
+MapTab:Section({ Title = "Base" })
+
+-- Spawnlar klasörü
+local SpawnFolder = workspace:WaitForChild("Spawnlar")
+
+-- Karakter hazır değilse beklet
+local function getCharacter()
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        return LocalPlayer.Character
+    end
+    return LocalPlayer.CharacterAdded:Wait()
+end
+
+-- Spawn noktaları için buton oluştur
+for _, spawnPoint in pairs(SpawnFolder:GetChildren()) do
+    if spawnPoint:IsA("BasePart") then
+        MapTab:Button({
+            Title = spawnPoint.Name,
+            Desc = "Tıkla ve ışınlan",
+            Callback = function()
+                local char = getCharacter()
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    hrp.CFrame = spawnPoint.CFrame + Vector3.new(0, 5, 0)
+                end
+            end
+        })
+    end
+end
+
+
+
+
+AutoTab:Section({ Title = "Jracks" })
+AutoTab:Button({
+	Title = "JJ",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/echelonvanta/T-rk-asker-oyunu/refs/heads/main/AUTO%20JJ.lua"))()
+	end    
+})
+
+AutoTab:Button({
+	Title = "GJ",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/echelonvanta/T-rk-asker-oyunu/refs/heads/main/AUTO%20GJ.lua"))()
+	end    
+})
+
+AutoTab:Button({
+	Title = "HJ",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/echelonvanta/T-rk-asker-oyunu/refs/heads/main/AUTO%20HJ.lua"))()
+	end    
+})
+
+AutoTab:Section({ Title = "Farmlar" })
+AutoTab:Code({
+    Title = "YerAltı Üssü",
+    Code = [[ loadstring(game:HttpGet("https://raw.githubusercontent.com/echelonvanta/T-rk-asker-oyunu/refs/heads/main/AutoFarm/Yerussu"))() ]]
+})
+
+
+AutoTab:Code({
+    Title = "Çöl Şehri",
+    Code = [[ loadstring(game:HttpGet("https://raw.githubusercontent.com/echelonvanta/T-rk-asker-oyunu/refs/heads/main/AutoFarm/Colsehri"))() ]]
+})
+
+
+ChatTab:Button({
+	Title = "Chatlogs",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/echelonvanta/T-rk-asker-oyunu/refs/heads/main/Chatlogs.lua"))()
+	end    
+})
+
+
+
+
+--[] Protection Function
+function Protection()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/Anti%20GUI%20Detection.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/AnthonyIsntHere/anthonysrepository/main/scripts/Anti%20Instance%20Detector.lua"))()
+end
+Protection()
+
+
+
+
