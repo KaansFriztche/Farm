@@ -66,6 +66,8 @@ local MainTab = Window:Tab({ Title = "Main", Icon = "house" })
 local PlayerTab = Window:Tab({ Title = "Player", Icon = "dna" })
 local VisualsTab = Window:Tab({ Title = "Visuals", Icon = "eye" })
 Window:Divider()
+local InGameTab = Window:Tab({ Title = "In-Game", Icon = "file-code" })
+Window:Divider()
 local TrollsTab = Window:Tab({ Title = "Trolls", Icon = "rbxassetid://104928133693808" })
 Window:Divider()
 local AdminsTab = Window:Tab({ Title = "Admins", Icon = "rbxassetid://6935096958" })
@@ -1827,6 +1829,29 @@ ScriptTab:Button({
     end
 })
 
+
+
+InGameTab:Section({ Title = "In-Game Scripts" })
+
+InGameTab:Button({
+    Title = "Purna",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/pXWQxpLK'))()
+    end
+})
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------
+
+
+
+
 --Trolls
 
 
@@ -2144,6 +2169,7 @@ DbgTab:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gameremotefireserver.lua"))()
 	end
 })
+
 
 
 
